@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="initial-scale=1.0, target-densitydpi=device-dpi" /><!-- this is for mobile (Android) Chrome -->
 <meta name="viewport" content="initial-scale=1.0, width=device-height"><!--  mobile Safari, FireFox, Opera Mobile  -->
-<script src="../libs/modernizr.js"></script>
+<script src="./js/jSignature/modernizr.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../libs/flashcanvas.js"></script>
 <![endif]-->
@@ -37,7 +37,7 @@
 	
 	/*This is the div within which the signature canvas is fitted*/
 	#signature {
-         width: 50%;
+        
 		border: 2px dotted black;
 		background-color:lightgrey;
 	}
@@ -51,7 +51,6 @@
 		float:right;
 		width:4%;
 		margin-right:2%;
-		background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAFCAAAAACh79lDAAAAAXNSR0IArs4c6QAAABJJREFUCB1jmMmQxjCT4T/DfwAPLgOXlrt3IwAAAABJRU5ErkJggg==)
 	}
 	html.borderradius #scrollgrabber {
 		border-radius: 1em;
@@ -66,11 +65,18 @@
 		<div>jSignature inherits colors from parent element. Text = Pen color. Background = Background. (This works even when Flash-based Canvas emulation is used.)</div>
 		<div id="signature"></div></div>
 	<div id="tools"></div>
+	<div id="test">
+		<input type="button" value="Get Sign" id="Getsign">
+		<input type="button" value="Print Sign" id="Printsign">
+	</div>
 	<div><p>Display Area:</p><div id="displayarea"></div></div>
+
+	<div id="aTest"></div>
+	<div id="bTest"></div>
 </div>
 <div id="scrollgrabber"></div>
 </div>
-<script src="../libs/jquery.js"></script>
+<script src="./js/jSignature/jquery.js"></script>
 <script>
 /*  @preserve
 jQuery pub/sub plugin by Peter Higgins (dante@dojotoolkit.org)
@@ -115,11 +121,10 @@ http://dojofoundation.org/license for more information.
 })(jQuery);
 
 </script>
-<script src="../src/jSignature.js"></script>
-<script src="../src/plugins/jSignature.CompressorBase30.js"></script>
-<script src="../src/plugins/jSignature.CompressorSVG.js"></script>
-<script src="../src/plugins/jSignature.UndoButton.js"></script> 
-<script src="../src/plugins/signhere/jSignature.SignHere.js"></script> 
+<script src="./js/jSignature/jSignature.js"></script>
+<script src="./js/jSignature//plugins/jSignature.CompressorBase30.js"></script>
+<script src="./js/jSignature/plugins/jSignature.CompressorSVG.js"></script>
+<script src="./js/jSignature/plugins/jSignature.UndoButton.js"></script> 
 <script>
 $(document).ready(function() {
 	
@@ -129,7 +134,7 @@ $(document).ready(function() {
 	// All the code below is just code driving the demo. 
 	, $tools = $('#tools')
 	, $extraarea = $('#displayarea')
-	, pubsubprefix = 'jSignature.demo.'
+	, pubsubprefix = 'bri.inkSign.';
 	
 	var export_plugins = $sigdiv.jSignature('listPlugins','export')
 	, chops = ['<span><b>Extract signature data as: </b></span><select>','<option value="">(select export format)</option>']
@@ -160,6 +165,17 @@ $(document).ready(function() {
 			}
 		}
 	}).appendTo($tools)
+	var dataString;
+	$('#Getsign').click(function () {
+		dataString = $("#signature").jSignature("getData", "image/svg+xml;base64");
+		$('#aTest').append('<p>' + dataString + '</p>');
+	});
+	$('#Printsign').click(function () {
+		dataString = $("#signature").jSignature("getData", "image/svg+xml;base64");
+		var i = new Image();
+		i.src = 'data:' + dataString[0] + ',' + dataString[1];
+		$('#aTest').append(i);
+	});
 
 	
 	$('<input type="button" value="Reset">').bind('click', function(e){
