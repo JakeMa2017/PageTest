@@ -46,15 +46,29 @@ $(document).ready(function() {
 
 	var dataString;
 	$('#Printsign').click(function () {
-		dataString = $("#signature").jSignature("getData", "image/svg+xml;base64");
+		dataString = $("#signature").jSignature("getData", "image/svg+xml");
 		var i = new Image();
 		i.src = 'data:' + dataString[0] + ',' + dataString[1];
-		$('#aTest').append(i);
+		
+		$('#string').val('data:' + dataString);
+		// Show signed and stop signing
+		$('#signedParent').attr('class', '');
+		$('#signatureparent').attr('class', 'hideo');
+		$('#signed').append(i);
+		var i2 = new Image();
+		i2.src = 'data:' + dataString[0] + ',' + dataString[1];
+		$('#displayarea').append(i2);
+		$('#signed img:last-child').attr('class', 'center');
 	});
 
 	
-	$($reset).bind('click', function(e){
+	$($reset).bind('click', function(){
 		$sigdiv.jSignature('reset')
+		// Hide signed display and sign agian
+		$('#signedParent').attr('class', 'hideo');
+		$('#signed img:last-child').remove('img');
+		$('#signatureparent').attr('class', '');
+		$('#string').val('');
 	});
 
 	

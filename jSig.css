@@ -11,14 +11,15 @@ select {
     padding: .5em;
     margin: .5em;
 }
+.hideo {
+    display: none;
+}
 
 #signatureparent {
     width: 50%;
-
     color:darkblue;
     background-color:darkgrey;
-    /*max-width:600px;*/
-    padding:20px;
+
 }
 
 /*This is the div within which the signature canvas is fitted*/
@@ -26,6 +27,24 @@ select {
     
     border: 2px dotted black;
     background-color:lightgrey;
+}
+
+#signedParent {
+    width: 50%;
+    color:darkblue;
+    background-color:darkgrey;
+}
+
+#signed {
+    padding:20px;
+    background-color:white;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 html.touch #content {
     float:left;
