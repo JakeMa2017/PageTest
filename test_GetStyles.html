@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<script>
+    function removeRequired() {
+        var tables = document.getElementsByTagName('table');
+        for (i = 0; i < tables.length; i++) {
+            if (tables[i].style['display'] != 'none') continue;
+            // console.log(tables[i].style['display'] == 'none');
+            var inputs = tables[i].getElementsByTagName('input');
+            for (j = 0; j < inputs.length; j++) {
+                inputs[j].required = false;
+            }
+        }
+    }
+    function checkFilledRequired() {
+        removeRequired();
+        var forms = document.getElementsByName('testForm');
+        if (forms[0].checkValidity()) return true;
+        return false;
+    }
+    function test() {
+        test1();
+        var c = document.getElementsByName('aaa');
+        for (i = 0; i < c.length; i++) {
+            var cs = c[i].style;
+            if (cs['display'] == 'none') {
+                console.log('yoxi');
+            } else {
+                console.log('oh man');
+            }
+        }
+    }
+</script>
+
+<body>
+    <!-- <div style="color:red; display:none" id="myElement" name='aaa'>
+        <span id="t1">span1</span>
+        <input type="date" name="tt1" id="tt1" required>Date1
+    </div>
+    <div style="display: none" name="aaa">00000000000
+        <span id="t2">span2</span>
+        <input type="date" name="tt2" id="tt2" required>Date2
+    </div>
+    <div name="aaa">asdfs</div> -->
+
+    <form name="testForm">
+        <table style="display: none;">
+            <tr>
+                <td>First name:</td>
+                <td><input type="text" name="firstnameO" value="" required></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td><input type="text" name="lastnameO" value="" required></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Submit" onclick="if (checkFilledRequired()) document.testForm.submit();">
+                </td>
+            </tr>
+        </table>
+
+
+        <table>
+            <tr>
+                <td>First name:<br></td>
+                <td><input type="text" name="firstname" value="" required></td>
+            </tr>
+            <tr>
+                <td>Last name:<br></td>
+                <td><input type="text" name="lastname" value="" required></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Submit" onclick="if (checkFilledRequired()) document.testForm.submit();">
+                </td>
+            </tr>
+        </table>
+
+    </form>
+</body>
+
+<script>
+    var element = document.getElementsByTagName("div");
+    var out = "";
+    // var computedStyle = window.getComputedStyle(element, null);
+    for (i = 0; i < element.length; i++) {
+        var elementStyle = element[i].style;
+        for (prop in elementStyle) {
+            // if (elementStyle.hasOwnProperty(prop)) {
+            //     out += "  " + prop + " = '" + elementStyle[prop] + "' > '" + computedStyle[prop] + "'\n";
+            // }
+            if (!prop.includes('display')) continue;
+            // out += prop + "---" + elementStyle[prop] + "       " + computedStyle[prop] + "\n";
+            out += prop + "---" + elementStyle[prop] + "\n";
+        }
+    }
+</script>
+
+</html>
