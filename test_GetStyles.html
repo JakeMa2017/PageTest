@@ -14,9 +14,11 @@
     }
     function checkFilledRequired() {
         removeRequired();
-        var forms = document.getElementsByName('testForm');
-        if (forms[0].checkValidity()) return true;
-        return false;
+        var forms = document.getElementsByTagName('form');
+        for (i = 0; i < forms.length; i++) {
+            if (!forms[i].checkValidity()) return false;
+        }
+        return true;
     }
     function test() {
         test1();
@@ -30,6 +32,8 @@
             }
         }
     }
+
+    console.log(typeof asdf === 'undefined');
 </script>
 
 <body>
