@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      $(document).ready(function() {
+        $("#banner")
+          .delay(0)
+          .slideDown("slow");
+        $("#closeButton").click(function() {
+          $("#banner").slideUp("slow");
+        });
+      });
+    </script>
+    <style>
+      div#banner {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #ddeeee;
+        width: 100%;
+      }
+      div#banner-content {
+        display: inline-block;
+        padding: 10px;
+        width: 95%;
+      }
+      #close {
+        display: inline-block;
+      }
+      #banner h3 {
+        display: block;
+        font-size: 1.17em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 0;
+        margin-right: 0;
+        font-weight: bold;
+        font-size: 15px;
+      }
+      #banner ul {
+        list-style-type: circle;
+        font: bold;
+        font-size: medium;
+      }
+      #banner li {
+        font: bold;
+        font-size: medium;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="banner">
+      <div id="banner-content">
+        <h3>Update Since Last Week</h3>
+        <ul>
+          <li>Health Alliance LG IL</li>
+          <li>Ink Sign For All Forms</li>
+          <li>Base Off Plan Rates Issue - Requested by Michael Anderson</li>
+          <li>Health Partners Health History MN & ND</li>
+        </ul>
+      </div>
+
+      <div id="close">
+        <button id="closeButton" type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

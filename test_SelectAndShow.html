@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- bootstrap -->
+    <link
+      rel='stylesheet'
+      href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'
+      integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T'
+      crossorigin='anonymous'
+    />
+
+    <!-- jquery -->
+    <script
+      src='https://code.jquery.com/jquery-3.4.1.min.js'
+      integrity='sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo='
+      crossorigin='anonymous'
+    ></script>
+    <script
+      src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js'
+      integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1'
+      crossorigin='anonymous'
+    ></script>
+    <style>
+      .hide {
+        display: none;
+      }
+    </style>
+      <script>
+        function createDateString(day, month, year) {
+            return year.toString() + '-' + (month.toString().length < 2 ? '0' : '') +
+            month.toString() + '-' + (day.toString().length < 2 ? '0' : '') +
+            day.toString();
+        }
+
+        function formatDateString(date) {
+          if (date.includes('/')) {
+            var day = date.split('/')[0];
+            var month = date.split('/')[1];
+            var year = date.split('/')[2];
+            return year + '-' + month + '-' + day;
+          } else if (date.includes('-')) {
+            var year = date.split('-')[0];
+            var month = date.split('-')[1];
+            var day = date.split('-')[2];
+            return day + '/' + month + '/' + year;
+          }
+        }
+
+        $(document).ready(function() {
+          var today = new Date();
+          var todayString = createDateString(today.getDate(), today.getMonth() + 1, today.getFullYear());
+          var d = new Date();
+          d.setDate(d.getDate() + 7);
+          var oneWeek = createDateString(d.getDate(), d.getMonth() + 1, d.getFullYear());
+          $('#showFromRow').removeClass('hide');
+          $('#showToRow').removeClass('hide');
+          $('#showToId').attr('readonly', true);
+          $('#showFromId').val(todayString);
+          $('#showToId').val(oneWeek);
+
+          $('#showFromId').change(function() {
+            var d = new Date();
+            var t = $('#length option:selected').text();
+            if (t.toLowerCase() == 'one week') {  // One Week
+              var selectedDate = parseInt($('#showFromId').val().split('-')[2]);
+              var selectedMonth = parseInt($('#showFromId').val().split('-')[1]);
+              d.setMonth(selectedMonth - 1);
+              d.setDate(selectedDate + 7);
+              var dateString = createDateString(d.getDate(), d.getMonth() + 1, d.getFullYear());
+              $('#showToId').val(dateString);
+              $('#showToId').attr('readonly', true);
+            } else if (t.toLowerCase() == 'one month') {  // One Month
+              var selectedDate = parseInt($('#showFromId').val().split('-')[2]);
+              var selectedMonth = parseInt($('#showFromId').val().split('-')[1]);
+              d.setMonth(selectedMonth);
+              d.setDate(selectedDate);
+              var dateString = createDateString(d.getDate(), d.getMonth() + 1, d.getFullYear());
+              $('#showToId').val(dateString);
+              $('#showToId').attr('readonly', true);
+            }
+          });
+          
+          $('#length').change(function() {
+            var d = new Date();
+            var t = $('#length option:selected').text();
+            
+            if (t.toLowerCase() == 'one week') {  // One Week
+              $('#showFromRow').removeClass('hide');
+              d.setDate(d.getDate() + 7);
+              var dateString = createDateString(d.getDate(), d.getMonth() + 1, d.getFullYear());
+              $('#showToId').val(dateString);
+              $('#showToRow').removeClass('hide');
+            } else if (t.toLowerCase() == 'one month') {  // One Month
+              $('#showFromRow').removeClass('hide');
+              var day = d.getDate();
+              d.setMonth(d.getMonth() + 1);
+              var dateString = createDateString(d.getDate(), d.getMonth() + 1, d.getFullYear());
+              $('#showToId').val(dateString);
+              $('#showToRow').removeClass('hide');
+            } else if (t.toLowerCase() == 'always on') { // Always On
+              $('#showFromRow').addClass('hide');
+              $('#showToRow').addClass('hide');
+              var month = d.getMonth() + 1;
+              d.setFullYear(d.getFullYear() + 999);
+              var dateString = createDateString(d.getDate(), d.getMonth() + 1, d.getFullYear());
+              $('#showToId').val(dateString);
+            } else if (t.toLowerCase() == 'set time length') { // Set your own
+              $('#showFromRow').removeClass('hide');
+              $('#showToRow').removeClass('hide');
+              $('#showToId').attr('readonly', false);
+              $('#showFromId').val('');
+              $('#showToId').val('');
+            }
+          });
+        });
+      </script>
+  </head>
+
+  <body>
+    <select id='length'>
+      <option value='volvo'>One Week</option>
+      <option value='saab'>One Month</option>
+      <option value='opel'>Always</option>
+      <option value='audi'>Set Time Length</option>
+    </select>
+    <div id='showFromRow'>
+      <span>Test1</span>
+      <input type='date' id='showFromId' />
+    </div>
+    <div id='showToRow'>
+      <span>Test2</span>
+      <input type='date' id='showToId' />
+    </div>
+
+
+    <div id='row1'>
+        <span>Test1</span>
+        <input type='date' id='input1' />
+      </div>
+      <div id='row2'>
+        <span>Test2</span>
+        <input type='date' id='input2' />
+      </div>
+    <div id='testo'>132</div>
+    <button id='tb'>aaaaaa</button>
+  </body>
+</html>
