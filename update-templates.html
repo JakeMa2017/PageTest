@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</head>
+
+<script>
+    function useTemplate(val) {
+            if(val == 0) {
+            document.Profile.carrier.value = '';
+            document.Profile.name.value = document.Profile.type.value;
+            }
+            // TEMPLATE SCRIPT
+            function updateTemplates(val) { 
+            var a = new Array();
+            a[a.length] = '(Blank Default)';
+            a[a.length] = 0;
+
+            // Query q = new Query();
+            // q.SELECT("id,type,name,carrierlocationid,companyid");
+            // q.FROM("plan");
+            // q.WHERE("(template = 1) OR (companyid = " + co.getId() + ")");
+            // q.ORDER("type,companyid desc,name");
+            // Results r = execute(q);
+            // String type = "";
+            // while(r.next()) {
+                 else if(val == " + r.get(0) + ") {
+                document.Profile.carrier.value = '" + r.get(3) + "';
+                document.Profile.name.value = '" + r.get(2) + "';
+                }
+                if(!type.equals(r.get(1))) {
+                    if(type.length() > 0) {
+                          } 
+                    }
+                    type = r.get(1);
+                     if(val == 
+                    sc2.add(type);
+                    ) { 
+                }
+                a[a.length] = 
+                if(!r.get(4).equals("0")) * 
+                sc2.add(r.get(2));
+                ;
+                a[a.length] = 
+                sc2.add(r.get(0));
+                ;
+                if(!r.hasNext())  } 
+            }
+
+            }
+            populateTextValues(document.Profile.copyPlan,a);
+            useTemplate(document.Profile.copyPlan.value);
+            }
+</script>
+
+<body></body>
+
+</html>

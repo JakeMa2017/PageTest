@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+   Remove this if you use the .htaccess -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, target-densitydpi=device-dpi" />
+    <!-- this is for mobile (Android) Chrome -->
+    <meta name="viewport" content="initial-scale=1.0, width=device-height">
+    <!--  mobile Safari, FireFox, Opera Mobile  -->
+    <link rel="stylesheet" href="jSig.css">
+    <script src="./js/jSignature/modernizr.js"></script>
+    <script src="./js/jSignature/jquery.js"></script>
+    <script src="bri-jSig.js"></script>
+    <script src="./js/jSignature/jSignature.js"></script>
+    <script src="./js/jSignature/plugins/jSignature.CompressorSVG.js"></script>
+    <script src="./js/jSignature/plugins/jSignature.UndoButton.js"></script>
+    <script src="validateNoFormSelection.js"></script>
+    <!-- <script src="do.js"></script> -->
+    <!--[if lt IE 9]>
+<script type="text/javascript" src="../libs/flashcanvas.js"></script>
+<![endif]-->
+
+    <script>
+        // $(document).ready(function () {
+        //     var selected = $('select[name$="location"]').val();
+        //     console.log(selected);
+        //     $('#selectedNameId').val(selected);
+        //     $('select[name$="location"]').change(function () {
+        //         // Select inputs whose name attribute value ends with '_name'
+        //         var selected = $('select[name$="location"]').val();
+        //         console.log(selected);
+        //         $('#selectedNameId').val(selected);
+        //         console.log("asdf: " + $('#selectedNameId').val());
+        //     });
+        // });
+    </script>
+</head>
+
+<body>
+    <table id="plansSelectionTable">
+        <tr>
+            <td>            
+                <input type="checkbox" name="vehicle1" value="Bike"> I have a bike<br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="vehicle2" value="Car"> I have a car<br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="vehicle3" value="Boat" checked> I have a boat<br>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

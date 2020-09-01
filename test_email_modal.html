@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</head>
+
+<script>
+  $(document).ready(function () {
+    // Get value on button click and show alert
+    $('#emailButton').click(function (e) {
+      if ($("#emailAddress").val() == "") {
+        $('#noEmailModal').modal();
+      } else {
+        $('#hasEmailModal').modal();
+      }
+    });
+    $('#submitEmail').click(function (e) {
+      $("#submitEmail").validate({
+        rules: {
+          field: {
+            required: true,
+            email: true
+          }
+        }
+      });
+      document.download.button.value = 'sendConfirmationEmail'; document.download.submit();
+    });
+    var str = $("#emailAddress").val();
+    console.log(str);
+    console.log($("#emailAddress").val() == "");
+  });
+</script>
+
+<body>
+  <div style="width: 500px; height: 60px; background: lightgreen; display:table" class="text-center">
+    <span style="display:table-cell; vertical-align: middle;">
+      Sha sha zhe sha
+    </span>
+    <input type="email" id="emailAddress">
+  </div>
+</body>
+
+</html>

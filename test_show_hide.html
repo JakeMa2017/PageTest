@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</head>
+
+<script>
+    $(document).ready(function () {
+        $('#stateChoice').change(function (e) {
+            if ($('#stateChoice').is(':checked') == true) {
+                $('#state').hide();
+            } else {
+                $('#state').show();
+            }
+        });
+        $('#networkChoice').change(function (e) {
+            if ($('#networkChoice').is(':checked') == true) {
+                $('#network').hide();
+                $('#state').show();
+            } else {
+                $('#network').show();
+                $('#state').hide();
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('#iaInstructionLine1').click(function (e) {
+            $('#iaInstructionLine1Text').toggle('fast');
+        });
+        $('#iaInstructionLine3').click(function (e) {
+            $('#iaInstructionLine3Text').toggle('fast');
+        });
+        $('#iaInstructionLine5').click(function (e) {
+            $('#iaInstructionLine5Text').toggle('fast');
+        });
+        $('#iaInstructionLine7').click(function (e) {
+            $('#iaInstructionLine7Text').toggle('fast');
+        });
+    });
+</script>
+
+
+<body>
+    <h3>Top Level</h3>
+    <div>
+        <input type="radio" id="entire" name="top" value="entire">
+        <label for="male">Entire US</label>
+        <input type="radio" id="stateChoice" name="top" value="stateChoice">
+        <label for="female">By State</label>
+        <input type="radio" id="networkChoice" name="top" value="networkChoice">
+        <label for="other">By Network</label>
+    </div>
+
+    <h3>First Level</h3>
+    <div>
+        <input type="radio" id="year" name="first" value="male">
+        <label for="male">Year</label>
+        <input type="radio" id="state" name="first" value="female">
+        <label for="female">State</label>
+        <input type="radio" id="network" name="first" value="other">
+        <label for="other">Network</label>
+    </div>
+
+    <h3>Second Level</h3>
+    <div>
+        <input type="radio" id="male" name="second" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="second" value="female">
+        <label for="female">Female</label>
+        <input type="radio" id="other" name="second" value="other">
+        <label for="other">Other</label>
+    </div>
+
+
+
+
+
+    <div>
+        This is a div 
+        <p>This is instruction</p>
+    </div>
+
+</body>
+
+</html>

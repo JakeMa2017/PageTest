@@ -1,186 +1,242 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- bootstrap -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
 
-    <!-- jquery -->
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <style>
-      tr,
-      th,
-      td {
-        border: 1px black solid;
-      }
-      body {
-        padding-top: 5%;
-        padding-left: 5%;
-      }
-      .noShow {
-        display: none;
-      }
-    </style>
+<head>
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="./banner_scripts.js"></script>
+  <style>
+    tr,
+    th,
+    td {
+      border: 1px black solid;
+    }
 
-    <script>
-      function formatDateString(date) {
-        if (date.includes("/")) {
-          var day = date.split("/")[1].trim();
-          var month = date.split("/")[0].trim();
-          var year = date.split("/")[2].trim();
-          return year + "-" + month + "-" + day;
-        } else if (date.includes("-")) {
-          var year = date.split("-")[0].trim();
-          var month = date.split("-")[1].trim();
-          var day = date.split("-")[2].trim();
-          return day + "/" + month + "/" + year;
-        }
-      }
-      $(document).ready(function() {
-        $(".updateButton").click(function(e) {
-          e.preventDefault();
+    body {
+      padding-top: 5%;
+      padding-left: 5%;
+    }
 
-          var $row = $(this).closest("tr");
-          var $tds = $row.find("td");
-          $("#dateId").val(formatDateString($($tds[0]).text()));
-          $("#subjectId").val($($tds[2]).text());
-          $("#notesId").val($($tds[3]).text());
-          if (
-            $($tds[1])
-              .text()
-              .toLowerCase() == "always on"
-          ) {
-            $("#length").val("Always On");
-            $("#showFromRow").addClass("hide");
-            $("#showToRow").addClass("hide");
-            var d = new Date();
-            $("#showFromId").val(
-              createDateString(d.getDate(), d.getMonth() + 1, d.getFullYear())
-            );
-            d.setFullYear(d.getFullYear() + 999);
-            var dateString = createDateString(
-              d.getDate(),
-              d.getMonth() + 1,
-              d.getFullYear()
-            );
-            $("#showToId").val(dateString);
-          } else {
-            $("#length").val("Set Time Length");
-            $('#showToId').attr('readonly', false);
-            $("#showFromId").val(
-              formatDateString(
-                $($tds[1])
-                  .text()
-                  .split("-")[0]
-              )
-            );
-            $("#showToId").val(
-              formatDateString(
-                $($tds[1])
-                  .text()
-                  .split("-")[1]
-              )
-            );
-            $('#addButton').html('Update');
-          }
-          console.log($($tds[5]).text());
-          $("#entryId").val($($tds[5]).val());
-        });
+    .hide {
+      display: none;
+    }
 
-        $("#gai").click(function() {
-          if ($("#idInput").val() != "") {
-            var $rows = $("#myTable > tbody > tr");
-            console.log($rows.length);
-            $.each($rows, function() {
-              var len = $rows.find("td").length;
-              var $td = $rows.find("td")[length - 1];
+    .noShow {
+      display: none;
+    }
+  </style>
+</head>
 
-              console.log(len);
-            });
-          } else {
-            alert("miao");
-          }
-        });
-      });
-    </script>
-  </head>
+<body>
+  <table id="myTable">
+    <thead>
+      <th>Create Date</th>
+      <th>Display Duration</th>
+      <th>Subject</th>
+      <th>Notes</th>
+      <th>Added to All</th>
+      <th>Actions</th>
+      <th class="noShow">ID</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>12/11/2019</td>
+        <td>12/11/2019 - 12/18/2019</td>
+        <td>Feature</td>
+        <td>We have an update banner feature now!</td>
+        <td>Yes</td>
+        <td><button class="updateButton">Update</button><button type="button" class="btn btn-danger deleteFromAllBt" data-toggle="modal" data-target="#deleteModal">
+          Delete!
+        </button></td>
+        <td class="noShow">0</td>
+      </tr>
+      <tr>
+        <td>1/11/2019</td>
+        <td>1/11/2019 - 1/18/2019</td>
+        <td>Form</td>
+        <td>Anthem LG in WI</td>
+        <td>No</td>
+        <td><button class="updateButton">Update</button><button type="button" class="btn btn-danger deleteFromAllBt" data-toggle="modal" data-target="#deleteModal">
+          Delete!
+        </button></td>
+        <td class="noShow">1</td>
+      </tr>
+      <tr>
+        <td>2/11/2019</td>
+        <td>2/11/2019 - 2/18/2019</td>
+        <td>Bug</td>
+        <td>You dont know</td>
+        <td>No</td>
+        <td><button class="updateButton">Update</button><button type="button" class="btn btn-danger deleteFromAllBt" data-toggle="modal" data-target="#deleteModal">
+          Delete!
+        </button></td>
+        <td class="noShow">2</td>
+      </tr>
+    </tbody>
+  </table>
+  <br />
+  <label for="t1">Create Date: </label><input type="text" name="t1" id="dateId" />
+  <br />
+  <label for="t2">Subject: </label><input type="text" name="t2" id="subjectId" />
+  <br />
+  <label for="t3">Notes: </label><textarea name="t3" rows="8" cols="50" id="notesId"></textarea>
+  <br />
+  <label for="length">Duration: </label>
+  <select id="length">
+    <option value="oneWeek">One Week</option>
+    <option value="oneMonth">One Month</option>
+    <option value="always">Always</option>
+    <option value="Set Time Length">Set Time Length</option>
+  </select>
+  <br />
+  <label for="t4">From: </label><input type="text" name="t4" id="showFromId" />
+  <br />
+  <label for="t5">To: </label><input type="text" name="t5" id="showToId" />
+  <br />
+  <label for="t7">Added to All: </label><input type="checkbox" name="t7" id="addToAllId" />
+  <br />
+  <label for="t6">ID: </label><input type="text" name="t6" id="entryId" />
+  <br />
 
-  <body>
-    <table id="myTable">
-      <thead>
-        <th>Create Date</th>
-        <th>Display Duration</th>
-        <th>Subject</th>
-        <th>Notes</th>
-        <th>Actions</th>
-        <th class="noShow">ID</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>12/11/2019</td>
-          <td>12/11/2019 - 12/18/2019</td>
-          <td>Feature</td>
-          <td>We have an update banner feature now!</td>
-          <td><button class="updateButton">Update</button></td>
-          <td class="noShow">0</td>
-        </tr>
-        <tr>
-          <td>1/11/2019</td>
-          <td>1/11/2019 - 1/18/2019</td>
-          <td>Form</td>
-          <td>Anthem LG in WI</td>
-          <td><button class="updateButton">Update</button></td>
-          <td class="noShow">1</td>
-        </tr>
-        <tr>
-          <td>2/11/2019</td>
-          <td>2/11/2019 - 2/18/2019</td>
-          <td>Bug</td>
-          <td>You dont know</td>
-          <td><button class="updateButton">Update</button></td>
-          <td class="noShow">2</td>
-        </tr>
-      </tbody>
-    </table>
-    <br />
-    <label for="t1">Create Date: </label
-    ><input type="text" name="t1" id="dateId" />
-    <br />
-    <label for="t2">Subject: </label
-    ><input type="text" name="t2" id="subjectId" />
-    <br />
-    <label for="t3">Notes: </label><input type="text" name="t3" id="notesId" />
-    <br />
-    <label for="length">Duration: </label>
-    <select id="length">
-      <option value="oneWeek">One Week</option>
-      <option value="oneMonth">One Month</option>
-      <option value="always">Always</option>
-      <option value="Set Time Length">Set Time Length</option>
+  <input type="submit" value="Submit" id="addId" />
+
+  <hr>
+  <div>
+    <select id='length'>
+      <option value='volvo'>One Week</option>
+      <option value='saab'>One Month</option>
+      <option value='opel'>Always</option>
+      <option value='audi'>Set Time Length</option>
     </select>
-    <br />
-    <label for="t4">From: </label
-    ><input type="text" name="t4" id="showFromId" />
-    <br />
-    <label for="t5">To: </label><input type="text" name="t5" id="showToId" />
-    <br />
-    <label for="t6">ID: </label
-    ><textarea name="notes" rows="8" cols="50" id="entryId"></textarea>
-    <br />
+    <div id='showFromRow'>
+      <span>Test1</span>
+      <input type='date' id='showFromId' />
+    </div>
+    <div id='showToRow'>
+      <span>Test2</span>
+      <input type='date' id='showToId' />
+    </div>
+    <div id='row1'>
+      <span>Test1</span>
+      <input type='date' id='input1' />
+    </div>
+    <div id='row2'>
+      <span>Test2</span>
+      <input type='date' id='input2' />
+    </div>
+    <div id='testo'>132</div>
+    <button id='tb'>aaaaaa</button>
+  </div>
+  <hr>
 
-    <button id="addButton">Gai!</button>
-  </body>
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal">
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="confirmationModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmationModalLabel">Adding to All</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Adding to ALL! Are you sure???
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelBtInModal">Cancel</button>
+          <input type="submit" class="btn btn-primary" data-dismiss="modal" name="Save" id="confirmBtInModal" value="Add to All" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+<hr>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-danger deleteBt" data-toggle="modal" data-target="#deleteModal">
+      Delete!
+    </button>
+  
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete from All</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Delete this one from ALL! Are you sure???
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelBtInDModal">Cancel</button>
+            <input type="submit" class="btn btn-danger" data-dismiss="modal" name="DeleteAll" id="deleteBtInModal" value="Delete from All" style="background-color: #dc3545;"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <button type="button" class="btn btn-danger deleteFromAllBt" data-toggle="modal" data-target="#deleteModal">
+      Delete!
+    </button>
+    <button type="button" class="btn btn-danger deleteFromAllBt" data-toggle="modal" data-target="#deleteModal">
+      Delete!
+    </button>
+    <button type="button" class="btn btn-danger deleteFromAllBt" data-toggle="modal" data-target="#deleteModal">
+      Delete!
+    </button>
+    <button type="button" class="btn btn-danger deleteFromAllBt" data-toggle="modal" data-target="#deleteModal">
+      Delete!
+    </button>
+    <input type="text" name="Delefe From All" id="deleteFromAllId">
+    <input type="text" name="synchedRecord" id="synchedRecordId">
+
+  <hr>
+  <input type="text" value="ama" id="modalTestInput">
+
+  <hr>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-warning deleteBt" data-toggle="modal" data-target="#updateModal">
+        Update
+      </button>
+    
+      <!-- Modal -->
+      <div class="modal fade" id="updateModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="updateModalLabel">Delete from All</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Delete this one from ALL! Are you sure???
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelBtInUModal">Cancel</button>
+              <input type="submit" class="btn btn-warning" data-dismiss="modal" name="Update All" id="updateBtInModal" value="Update" style="background-color: #ffc107;"/>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+
 </html>

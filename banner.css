@@ -1,0 +1,35 @@
+ div#banner {
+        display: none;
+        position: relative;
+        top: 0;
+        left: 0;
+        background-color: #ddeeee;
+        width: 100%;
+      }
+      div#banner-content {
+        display: inline-block;
+        padding: 10px;
+        width: 95%;
+      }
+      #close {
+        display: inline-block;
+      }
+      #banner h3 {
+        display: block;
+        font-size: 1.17em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 0;
+        margin-right: 0;
+        font-weight: bold;
+        font-size: 15px;
+      }
+      #banner ul {
+        list-style-type: circle;
+        font: bold;
+        font-size: medium;
+      }
+      #banner li {
+        font: bold;
+        font-size: medium;
+      }

@@ -47,6 +47,7 @@
         }
 
         $(document).ready(function() {
+          
           var today = new Date();
           var todayString = createDateString(today.getDate(), today.getMonth() + 1, today.getFullYear());
           var d = new Date();
@@ -57,23 +58,27 @@
           $('#showToId').attr('readonly', true);
           $('#showFromId').val(todayString);
           $('#showToId').val(oneWeek);
-
+          
           $('#showFromId').change(function() {
             var d = new Date();
             var t = $('#length option:selected').text();
             if (t.toLowerCase() == 'one week') {  // One Week
               var selectedDate = parseInt($('#showFromId').val().split('-')[2]);
               var selectedMonth = parseInt($('#showFromId').val().split('-')[1]);
+              var selectedYear = parseInt($('#showFromId').val().split('-')[0]);
               d.setMonth(selectedMonth - 1);
               d.setDate(selectedDate + 7);
+              d.setFullYear(selectedYear);
               var dateString = createDateString(d.getDate(), d.getMonth() + 1, d.getFullYear());
               $('#showToId').val(dateString);
               $('#showToId').attr('readonly', true);
             } else if (t.toLowerCase() == 'one month') {  // One Month
               var selectedDate = parseInt($('#showFromId').val().split('-')[2]);
               var selectedMonth = parseInt($('#showFromId').val().split('-')[1]);
+              var selectedYear = parseInt($('#showFromId').val().split('-')[0]);
               d.setMonth(selectedMonth);
               d.setDate(selectedDate);
+              d.setFullYear(selectedYear);
               var dateString = createDateString(d.getDate(), d.getMonth() + 1, d.getFullYear());
               $('#showToId').val(dateString);
               $('#showToId').attr('readonly', true);
@@ -85,12 +90,14 @@
             var t = $('#length option:selected').text();
             
             if (t.toLowerCase() == 'one week') {  // One Week
+              $('#showFromId').val(todayString);
               $('#showFromRow').removeClass('hide');
               d.setDate(d.getDate() + 7);
               var dateString = createDateString(d.getDate(), d.getMonth() + 1, d.getFullYear());
               $('#showToId').val(dateString);
               $('#showToRow').removeClass('hide');
             } else if (t.toLowerCase() == 'one month') {  // One Month
+              $('#showFromId').val(todayString);
               $('#showFromRow').removeClass('hide');
               var day = d.getDate();
               d.setMonth(d.getMonth() + 1);

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</head>
+
+<script>
+    $(document).ready(function () {
+        $('#ms').change(function () {
+            var selection = $('#ms option:selected');
+            if (selection.val() === 'a') {
+                $('#sg1').show();
+                $('#sg2').hide();
+            } else if (selection.val() === 'b') {
+                $('#sg1').hide();
+                $('#sg2').show();
+            }
+        });
+
+        $('#sa').click(function () {
+            $('#se2 option').each(function () {
+                $(this).prop('selected', true);
+            });
+        });
+        $('#da').click(function () {
+            $('#se2 option').each(function () {
+                $(this).prop('selected', false);
+            });
+        });
+
+        let all1;
+        let all2;
+        let none1;
+        let none2;
+        $("#ms option[value='none']").prop('selected', true);
+
+        $('#se1').change(function () {
+            all1 = true;
+            all2 = true;
+            none1 = true;
+            none2 = true;
+            $('#se1 option').each(function () {
+                if (!$(this).prop('selected')) {
+                    all1 = false;
+                }
+                if ($(this).prop('selected')) {
+                    none1 = false;
+                }
+            });
+            $('#se2 option').each(function () {
+                if (!$(this).prop('selected')) {
+                    all2 = false;
+                }
+                if ($(this).prop('selected')) {
+                    none2 = false;
+                }
+            });
+            if (all1 && all2) {
+                $("#ms option[value='all']").prop('selected', true);
+                $("#ms option[value='none']").prop('selected', false);
+                $("#ms option[value='custom']").prop('selected', false);
+            } else if (none1 && none2) {
+                $("#ms option[value='all']").prop('selected', false);
+                $("#ms option[value='none']").prop('selected', true);
+                $("#ms option[value='custom']").prop('selected', false);
+            } else {
+                $("#ms option[value='all']").prop('selected', false);
+                $("#ms option[value='none']").prop('selected', false);
+                $("#ms option[value='custom']").prop('selected', true);
+            }
+        });
+
+
+        $('#se2').change(function () {
+            all1 = true;
+            all2 = true;
+            none1 = true;
+            none2 = true;
+            $('#se1 option').each(function () {
+                if (!$(this).prop('selected')) {
+                    all1 = false;
+
+                }
+                console.log(all1);
+                if ($(this).prop('selected')) {
+                    none1 = false;
+                }
+            });
+            $('#se2 option').each(function () {
+                if (!$(this).prop('selected')) {
+                    all2 = false;
+                }
+                if ($(this).prop('selected')) {
+                    none2 = false;
+                }
+            });
+            if (all1 && all2) {
+                $("#ms option[value='all']").prop('selected', true);
+                $("#ms option[value='none']").prop('selected', false);
+                $("#ms option[value='custom']").prop('selected', false);
+            } else if (none1 && none2) {
+                $("#ms option[value='all']").prop('selected', false);
+                $("#ms option[value='none']").prop('selected', true);
+                $("#ms option[value='custom']").prop('selected', false);
+            } else {
+                $("#ms option[value='all']").prop('selected', false);
+                $("#ms option[value='none']").prop('selected', false);
+                $("#ms option[value='custom']").prop('selected', true);
+            }
+        });
+
+
+
+
+    });
+</script>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+
+                <label class="text-muted">Main Selection</label>
+                <select class="custom-select" id="ms" multiple>
+                    <option value="a">a</option>
+                    <option value="b">b</option>
+                    <option value="all">all</option>
+                    <option value="none">none</option>
+                    <option value="custom">custom</option>
+                </select>
+
+                <div id="sg1">
+                    <label class="text-muted">Subgroup 1</label>
+                    <select class="custom-select" id="se1" multiple>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div id="sg2">
+                    <label class="text-muted">Subgroup 2</label>
+                    <select class="custom-select" id="se2" multiple>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                </div>
+
+                <button id="sa">Select all in subgroup 2</button>
+                <button id="da">Deselect all in subgroup 2</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
